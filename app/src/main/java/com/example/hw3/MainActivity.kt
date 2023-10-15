@@ -2,7 +2,6 @@ package com.example.hw3
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 
@@ -59,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         expression = ArrayList();
     }
 
-    fun addDigit(button: Button) {
+    private fun addDigit(button: Button) {
         button.setOnClickListener{
             val digit = button.text.toString();
             if(expression.size==0){
@@ -67,48 +66,48 @@ class MainActivity : AppCompatActivity() {
             }else {
                 var lastItem = expression.removeLast()
                 lastItem += digit;
-                Log.d("lastItem", lastItem)
                 expression.add(lastItem);
             }
             setResult();
         }
     }
 
-    fun addMinus () {
+    private fun addMinus () {
         if (expression.size == 0) {
             expression.add("-")
         } else {
-            expression.removeLast();
+            if(expression.last() == "") {
+                expression.removeLast();
+            }
+            val prev = expression.last();
             expression.add("-");
+            if(prev !in arrayOf("%","÷","×", "-", "+")){
+                expression.add("");
+            }
         }
         setResult();
     }
 
-    fun switchSign () {
+    private fun switchSign () {
         if (expression.size == 0) {
             expression.add("-")
         } else {
-            var lastItem =expression.removeLast();
-            expression.add("-$lastItem");
+            val lastItem =expression.removeLast();
+            if(lastItem.startsWith("-")){
+                expression.add(lastItem.substring(1))
+            }else{
+                expression.add("-$lastItem");
+            }
         }
         setResult();
     }
 
-    fun addOperator(button: Button) {
+    private fun addOperator(button: Button) {
         button.setOnClickListener{
-            val operator = button.text.toString();
             if(expression.size == 0 || expression.last() == ""){
-                if (operator == "−" ){
-                    if(expression.size ==0){
-                        expression.add("-")
-                    }else{
-                        expression.removeLast();
-                        expression.add("-");
-                    }
-                }else {
                     setResultError();
-                }
             }else {
+                val operator = button.text.toString();
                 expression.add(operator)
                 expression.add("")
                 setResult();
@@ -116,24 +115,24 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun expressionToString(): String{
+    private fun expressionToString(): String{
         return expression.joinToString (separator = " ") {it}
     }
 
-    fun evaluateOperator(num1: Float, operator:String, num2:Float): Float {
-        when (operator) {
-            "%"-> return num1%num2;
-            "÷" -> return num1/num2;
-            "×" -> return num1*num2;
-            "−" -> return num1-num2;
-            "+" -> return num1+num2;
+    private fun evaluateOperator(num1: Float, operator:String, num2:Float): Float {
+        return when (operator) {
+            "%"-> num1%num2;
+            "÷" -> num1/num2;
+            "×" -> num1*num2;
+            "-" -> num1-num2;
+            "+" -> num1+num2;
             else -> {
                 throw Throwable("Incorrect Operator")
             }
         }
     }
 
-    fun evaluate() {
+    private fun evaluate() {
         if (expression.size<3 || expression.size%2 ==0 ) {
             setResultError();
         }else {
@@ -146,9 +145,7 @@ class MainActivity : AppCompatActivity() {
                 while (i < expression.size) {
                     operator = expression[i];
                     next = expression[i + 1].toFloat();
-
                     result = evaluateOperator(prev, operator, next);
-                    Log.d("result", result.toString())
                     prev = result
 
                     i += 2;
@@ -162,12 +159,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun setResultError(){
+    private fun setResultError(){
         res.text = "Error";
         expression=ArrayList();
     }
 
-    fun setResult(){
+    private fun setResult(){
         res.text = expressionToString();
     }
 }
