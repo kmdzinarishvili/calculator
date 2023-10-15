@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText"
+    android:background="@color/black"
+    tools:context=".MainActivity">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5sp"
+            android:text="0"
+            android:textAlignment="textEnd"
+            android:textColor="@color/white"
+            android:textSize="50sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        style="@style/buttonRow">
+        <Button
+            android:id="@+id/all_clear"
+            style="@style/buttonTop"
+            android:text="AC"/>
+        <Button
+            android:id="@+id/switch_sign"
+            style="@style/buttonTop"
+            android:text="⁺∕₋"
+            />
+        <Button
+            android:id="@+id/modal"
+            style="@style/buttonTop"
+            android:text="%" />
+        <Button
+            android:id="@+id/divide"
+            style="@style/buttonOperator"
+            android:text="÷"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/buttonRow">
+        <Button
+            style="@style/buttonNumber"
+            android:id="@+id/seven"
+            android:text="7"/>
+        <Button
+            style="@style/buttonNumber"
+            android:id="@+id/eight"
+            android:text="8"/>
+        <Button
+            style="@style/buttonNumber"
+            android:id="@+id/nine"
+            android:text="9" />
+        <Button
+            android:id="@+id/multiply"
+            style="@style/buttonOperator"
+            android:text="×"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/buttonRow">
+        <Button
+            style="@style/buttonNumber"
+            android:id="@+id/four"
+            android:text="4"/>
+        <Button
+            style="@style/buttonNumber"
+            android:id="@+id/five"
+            android:text="5"/>
+        <Button
+            style="@style/buttonNumber"
+            android:id="@+id/six"
+            android:text="6" />
+        <Button
+            android:id="@+id/subtract"
+            style="@style/buttonOperator"
+            android:text="−"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/buttonRow">
+
+        <Button
+            style="@style/buttonNumber"
+            android:id="@+id/one"
+            android:text="1"/>
+        <Button
+            style="@style/buttonNumber"
+            android:id="@+id/two"
+            android:text="2"/>
+        <Button
+            style="@style/buttonNumber"
+            android:id="@+id/three"
+            android:text="3" />
+        <Button
+            android:id="@+id/add"
+            style="@style/buttonOperator"
+            android:text="+"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/buttonRow">
+
+        <Button
+            style="@style/buttonLarge"
+            android:id="@+id/zero"
+            android:text="0"
+            />
+        <Button
+            style="@style/buttonNumber"
+            android:id="@+id/point"
+            android:text="."/>
+        <Button
+            android:id="@+id/equal"
+            style="@style/buttonOperator"
+            android:text="="/>
+    </LinearLayout>
+
+
+
+</LinearLayout>
